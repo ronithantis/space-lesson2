@@ -285,11 +285,11 @@ body.prestart .sheetbtn{display:none}
 <div id="printView" hidden><div class="pv-card" role="dialog" aria-modal="true" aria-labelledby="pvTitle">
   <h2 id="pvTitle">דפים להדפסה</h2>
   <ul class="pv-list">
-    <li><span>כל דפי השיעור בקובץ אחד<small>11 עמודים · A4</small></span><a class="btn" href="print/space_lesson2_print.pdf" download>הורדה כ-PDF</a></li>
-    <li><span>יומן המשימה · דף שער<small>פעם אחת בתחילת הקורס · לשקית הראשונה בתיקייה</small></span><a class="btn" href="print/journal_cover.pdf" download>הורדה כ-PDF</a><button class="btn" data-print="cover">הדפסה</button></li>
-    <li><span>הלוויין שלי · שלב 2<small>משימה 2 · עותק לכל תלמיד</small></span><a class="btn" href="print/journal_l2.pdf" download>הורדה כ-PDF</a><button class="btn" data-print="journal">הדפסה</button></li>
-    <li><span>מרכז המשימות · כרטיסי משימה<small>הרחבה · 6 כרטיסים ודף כיוונים למורה</small></span><a class="btn" href="print/missions.pdf" download>הורדה כ-PDF</a><button class="btn" data-print="missions">הדפסה</button></li>
-    <li><span>בונים לוויין · דפי הרכבה<small>הרחבה · 2 דפים לכל תלמיד</small></span><a class="btn" href="print/craft.pdf" download>הורדה כ-PDF</a><button class="btn" data-print="craft">הדפסה</button></li>
+    <li><span>כל דפי השיעור בקובץ אחד<small>11 עמודים · A4</small></span><a class="btn" href="space_lesson2_print.pdf" download>הורדה כ-PDF</a></li>
+    <li><span>יומן המשימה · דף שער<small>פעם אחת בתחילת הקורס · לשקית הראשונה בתיקייה</small></span><a class="btn" href="journal_cover.pdf" download>הורדה כ-PDF</a><button class="btn" data-print="cover">הדפסה</button></li>
+    <li><span>הלוויין שלי · שלב 2<small>משימה 2 · עותק לכל תלמיד</small></span><a class="btn" href="journal_l2.pdf" download>הורדה כ-PDF</a><button class="btn" data-print="journal">הדפסה</button></li>
+    <li><span>מרכז המשימות · כרטיסי משימה<small>הרחבה · 6 כרטיסים ודף כיוונים למורה</small></span><a class="btn" href="missions.pdf" download>הורדה כ-PDF</a><button class="btn" data-print="missions">הדפסה</button></li>
+    <li><span>בונים לוויין · דפי הרכבה<small>הרחבה · 2 דפים לכל תלמיד</small></span><a class="btn" href="craft.pdf" download>הורדה כ-PDF</a><button class="btn" data-print="craft">הדפסה</button></li>
   </ul>
   <button class="btn pv-close" id="pvClose">סגירה</button>
 </div></div>
@@ -377,10 +377,10 @@ const P = (img,cap,o) => Object.assign(I(cap,{size:1.1,weight:500,gap:0}), {img}
 const WATCH = () => B(14,4.5,72,[T('צפו בסרטון',{size:2.4})]);
 
 const DEFAULTS = [
-  {id:'s01', label:'לכל משימה, הכלי שלה', bg:'s01', bgVideo:'video/l2_s01_opening.mp4', audio:'l2_s01', shade:'right', motion:'none', noAuto:true, blocks:[
+  {id:'s01', label:'לכל משימה, הכלי שלה', bg:'s01', bgVideo:'l2_s01_opening.mp4', audio:'l2_s01', shade:'right', motion:'none', noAuto:true, blocks:[
     B(54,14,41,[G('שיעור 2',{size:1.8,gap:0}), T('לכל משימה,\nהכלי שלה',{size:4.6,gap:.4}),
       G('תקשורת • ניווט • מחקר • טלסקופים',{size:1.9,gap:1.6,seq:[15.8, 17.8, 19.6, 21.0]})])]},
-  {id:'ws', label:'חוזרים על שיעור 1: תפזורת', task:'חזרה', bg:'stars', kind:'embed', url:'games/l2_wordsearch.html', audio:'l2_s01b', noAuto:true, blocks:[]},
+  {id:'ws', label:'חוזרים על שיעור 1: תפזורת', task:'חזרה', bg:'stars', kind:'embed', url:'l2_wordsearch.html', audio:'l2_s01b', noAuto:true, blocks:[]},
   {id:'s02', label:'שלפו את הכרטיס', bg:'s02', audio:'l2_s02', shade:'left', noAuto:true, blocks:[
     B(5,16,42,[T('שלפו את הכרטיס',{at:7.8}), I('המקום שבחרתם, והשאלה שרציתם לחקור.',{gap:.6,at:7.8}),
       G('האם לוויין אחד יכול לענות\nעל כל השאלות?',{size:2.2,gap:1.4,at:13.6})])]},
@@ -397,7 +397,7 @@ const DEFAULTS = [
     B(52,54,43,[G('3. איזה מכשיר יאסוף אותו?',{size:2.2,gap:0})],{step:3}),
     B(52,64,43,[G('4. איפה למקם את הלוויין?',{size:2.2,gap:0})],{step:4}),
     B(52,78,43,[I('רק אחרי זה מתכננים את הלוויין.',{size:1.7,gap:0})],{step:4})]},
-  {id:'s05', label:'תקשורת: עמוס', bg:'s05', bgVideo:'video/l2_s05_amos.mp4', segAudio:['l2_s05a','l2_s05b'], shade:'right', noAuto:true, blocks:[
+  {id:'s05', label:'תקשורת: עמוס', bg:'s05', bgVideo:'l2_s05_amos.mp4', segAudio:['l2_s05a','l2_s05b'], shade:'right', noAuto:true, blocks:[
     B(54,10,41,[G('לוויין תקשורת',{size:1.8,gap:0}), T('כ-36,000 ק"מ\nמכדור הארץ',{size:3.4,gap:.3,at:5.1}),
       I('למה כל כך רחוק?',{size:2,weight:500,gap:1,at:12.2,until:99})]),
     B(54,48,41,[I('הקפה אחת = סיבוב אחד של כדור הארץ',{size:1.8,gap:0,at:6.3}),
@@ -447,13 +447,13 @@ const DEFAULTS = [
     B(2,3,45,[I("ג'יימס ווב · אינפרה־אדום",{size:1.5,weight:700,gap:0})],{step:1,align:'center'}),
     B(15,86,70,[G('מה אתם רואים עכשיו, שלא ראיתם קודם?',{size:2,gap:0,at:5.2})],{step:1,align:'center',hideFrom:2}),
     B(15,86,70,[G('הכלי קובע מה אפשר לגלות.',{size:2.2,gap:0,at:19.9})],{step:2,align:'center'})]},
-  {id:'parts', label:'מה יש בלוויין?', task:'משימה 1', bg:'stars', kind:'embed', url:'games/l2_satellite_parts.html', segAudio:['l2_s14a','l2_s14b'], steps:1, noAuto:true, blocks:[]},
+  {id:'parts', label:'מה יש בלוויין?', task:'משימה 1', bg:'stars', kind:'embed', url:'l2_satellite_parts.html', segAudio:['l2_s14a','l2_s14b'], steps:1, noAuto:true, blocks:[]},
   {id:'s13', label:'הלוויין שלי · שלב 2', task:'משימה 2', bg:'draft', audio:'l2_s13', shade:'right', noAuto:true, sheet:'journal', blocks:[
     B(54,10,42,[G('יומן המשימה',{size:1.8,gap:0}), T('הלוויין שלי · שלב 2',{size:3.2,gap:.3}),
       G('משימה • מידע • מכשיר • מיקום',{size:2,gap:1,seq:[14.1, 15.6, 17.0, 18.5]}),
       I('הלוויין שלי צריך... כדי לגלות...',{size:1.9,weight:500,gap:1,at:22.5}),
       I('שמרו את הדף בשקית של שיעור 2.',{size:1.6,gap:.8,at:25.5})])]},
-  {id:'missions', label:'מרכז המשימות', task:'הרחבה', bg:'stars', kind:'embed', url:'games/l2_missions.html', audio:'l2_s12', noAuto:true, sheet:'missions', blocks:[]},
+  {id:'missions', label:'מרכז המשימות', task:'הרחבה', bg:'stars', kind:'embed', url:'l2_missions.html', audio:'l2_s12', noAuto:true, sheet:'missions', blocks:[]},
   {id:'s15', label:'לא מתחילים בלוויין', bg:'s15', audio:'l2_s15', shade:'top', noAuto:true, blocks:[
     B(10,5,80,[G('תקשורת • ניווט • מזג אוויר • מחקר • טלסקופים',{size:1.9,gap:0,seq:[5.0, 6.6, 8.2, 9.9, 11.0]}),
       T('לא מתחילים בלוויין. מתחילים בשאלה.',{size:3.4,gap:.6,at:15.6})],{align:'center'}),
@@ -579,7 +579,7 @@ function renderSheetBtn(s){
   const b = $('#sheetBtn'); b.classList.remove('pulse');
   if (s.sheet && SHEET_FILES[s.sheet]){ b.classList.add('on'); setTimeout(() => b.classList.add('pulse'), 900); } else b.classList.remove('on');
 }
-const SHEET_FILES = {guide:'guide.html', journal:'print/journal_l2.html', cover:'print/journal_cover.html', missions:'print/missions.html', craft:'print/craft.html'};
+const SHEET_FILES = {guide:'guide.html', journal:'journal_l2.html', cover:'journal_cover.html', missions:'missions.html', craft:'craft.html'};
 function openSheet(k){ if (!SHEET_FILES[k]) return; $('#svWin').style.display = (k === 'guide') ? '' : 'none'; audio.pause(); $('#svTitle').textContent = SHEET_TITLES[k]||''; $('#svFrame').removeAttribute('srcdoc'); $('#svFrame').src = SHEET_FILES[k]; $('#sheetView').hidden = false; }
 function closeSheet(){ if (document.fullscreenElement) document.exitFullscreen().catch(()=>{}); $('#sheetView').hidden = true; $('#svFrame').src = 'about:blank'; }
 $('#sheetBtn').onclick = () => openSheet(STEPS[cur].sheet);
@@ -715,7 +715,7 @@ function loadNarration(s, seg){
   if (!s.audio && !s.segAudio){ narr.style.visibility='hidden'; return; }
   narr.style.visibility='visible'; narr.classList.remove('missing'); $('#narrNote').textContent='';
   const name = s.segAudio ? s.segAudio[seg] : s.segments ? `${s.audio}_${seg}` : s.audio;
-  audio.src = `audio/${name}_${LANG}.mp3`;
+  audio.src = `${name}_${LANG}.mp3`;
   const myLoad = ++loadSeq;
   if ((prefs.autoNarr || s.opening) && !editing && started){ armKinetic(); audio.play().catch(err => { if (myLoad !== loadSeq || (err && err.name === 'AbortError')) return; revealAllTokens(); narrDone(); }); }
   else { revealAllTokens(); narrDone(); }
