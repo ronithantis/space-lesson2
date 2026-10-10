@@ -1,0 +1,74 @@
+<!doctype html><html lang="he" dir="rtl"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>מרכז המשימות</title>
+<link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{--void:#02040a;--ink:#e9eef6;--muted:#97a4ba;--line:rgba(190,210,240,.16);--gold:#d8b46a;--glass:rgba(8,14,28,.72)}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%;background:radial-gradient(ellipse at 70% 20%,#0b1426,#02040a 70%);color:var(--ink);font-family:Heebo,system-ui,sans-serif}
+.app{height:100%;display:flex;flex-direction:column;padding:2.4vh 3vw}
+header{display:flex;justify-content:space-between;align-items:flex-end;gap:2vw}
+h1{font-size:clamp(22px,3.4vw,44px);font-weight:700}
+.sub{color:var(--muted);font-size:clamp(13px,1.35vw,18px);margin-top:.4vh}
+.print{font:inherit;font-size:clamp(12px,1.1vw,15px);color:var(--ink);background:transparent;border:1px solid var(--line);border-radius:999px;padding:.5em 1.2em;text-decoration:none;white-space:nowrap}
+.print:hover{border-color:var(--gold)}
+.steps{display:flex;gap:1vw;margin-top:1.6vh;flex-wrap:wrap}
+.steps span{font-size:clamp(12px,1.15vw,16px);color:#cfd8e6;border:1px solid var(--line);border-radius:999px;padding:.25em .9em}
+.steps b{color:var(--gold);font-weight:700;margin-inline-end:.35em}
+.grid{flex:1;display:grid;grid-template-columns:repeat(3,1fr);grid-template-rows:repeat(2,1fr);gap:1.4vw;margin-top:2vh;min-height:0}
+.card{all:unset;cursor:pointer;background:var(--glass);border:1px solid var(--line);border-radius:14px;padding:2vh 1.6vw;display:flex;flex-direction:column;gap:1vh;transition:border-color .2s,transform .2s;min-height:0;overflow:hidden}
+.card:hover,.card:focus-visible{border-color:var(--gold);transform:translateY(-2px)}
+.no{font-size:clamp(14px,1.4vw,20px);color:var(--gold);font-weight:700}
+.req{font-size:clamp(14px,1.55vw,22px);font-weight:500;line-height:1.35}
+.con{font-size:clamp(12px,1.15vw,16px);color:var(--muted);line-height:1.4;margin-top:auto}
+.con b{color:#cfd8e6;font-weight:500}
+.ov{position:fixed;inset:0;background:rgba(1,3,8,.82);display:flex;align-items:center;justify-content:center;padding:3vh 4vw}
+.ov[hidden]{display:none}
+.big{width:min(1100px,100%);max-height:100%;overflow:auto;background:rgba(8,15,30,.95);border:1px solid var(--line);border-radius:18px;padding:4vh 4vw;display:flex;flex-direction:column;gap:2.2vh}
+.big .no{font-size:clamp(16px,1.8vw,24px)}
+.big .req{font-size:clamp(22px,3vw,42px);line-height:1.3}
+.big .con{font-size:clamp(17px,2vw,28px);color:var(--ink);border:1px dashed rgba(216,180,106,.6);border-radius:12px;padding:1.4vh 1.4vw;margin:0}
+.big .con b{color:var(--gold)}
+.big ol{list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:1.2vh 2vw;counter-reset:q}
+.big li{counter-increment:q;font-size:clamp(15px,1.6vw,22px);display:flex;gap:.6em;align-items:baseline}
+.big li::before{content:counter(q);color:var(--void);background:var(--gold);border-radius:50%;width:1.6em;height:1.6em;display:inline-flex;align-items:center;justify-content:center;font-weight:700;font-size:.8em;flex:none}
+.big .pres{color:var(--muted);font-size:clamp(14px,1.4vw,19px)}
+.row{display:flex;gap:1vw;flex-wrap:wrap}
+.btn{font:inherit;font-size:clamp(13px,1.2vw,16px);padding:.55em 1.4em;border-radius:999px;cursor:pointer;border:1px solid var(--gold);background:var(--gold);color:#1b1407;font-weight:500}
+.btn.ghost{background:transparent;color:var(--ink);border-color:var(--line)}
+.key{font-size:clamp(14px,1.4vw,19px);line-height:1.5;color:#cfd8e6;background:rgba(216,180,106,.08);border-radius:12px;padding:1.2vh 1.4vw}
+.key[hidden]{display:none}
+:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style></head><body>
+<div class="app">
+  <header><div><h1>מרכז המשימות</h1><p class="sub">כל קבוצה בוחרת בקשת משימה אחת. לחצו על כרטיס כדי להגדיל אותו.</p></div>
+  <a class="print" href="../print/missions.pdf" target="_blank" rel="noopener">כרטיסים להדפסה (PDF)</a></header>
+  <div class="steps"><span><b>1</b>מה המשימה?</span><span><b>2</b>איזה מידע צריך?</span><span><b>3</b>איזה מכשיר יאסוף אותו?</span><span><b>4</b>איפה למקם את הלוויין, ולמה?</span></div>
+  <div class="grid" id="grid"></div>
+</div>
+<div class="ov" id="ov" hidden><div class="big" role="dialog" aria-modal="true" aria-labelledby="bReq">
+  <div class="no" id="bNo"></div><div class="req" id="bReq"></div>
+  <div class="con"><b>האילוץ: </b><span id="bCon"></span></div>
+  <ol><li>מה המשימה? מה אנחנו רוצים לדעת?</li><li>איזה מידע צריך?</li><li>איזה מכשיר יאסוף את המידע?</li><li>איפה כדאי למקם את הלוויין, ולמה?</li></ol>
+  <p class="pres">בדקה אחת הציגו: מה תכננתם, איך התמודדתם עם האילוץ, ומה תעשו עם המידע.</p>
+  <div class="key" id="bKey" hidden></div>
+  <div class="row"><button class="btn" id="close" type="button">חזרה לכל הכרטיסים</button><button class="btn ghost" id="showKey" type="button">כיוון לתשובה (למורה)</button></div>
+</div></div>
+<script>
+const C = [{"req": "רשות הכבאות רוצה לגלות שריפות ביער הכרמל מוקדם ככל האפשר.", "con": "השריפות פורצות גם בלילה, ולפעמים הן מוסתרות מתחת לעשן.", "key": "חיישן אינפרה־אדום שקולט חום, גם בלילה ודרך עשן. לוויין נמוך כדי לראות פרטים, או כמה לוויינים כדי לעבור מעל האזור לעיתים קרובות."}, {"req": "חברת ספנות רוצה שבספינות שלה יהיה אינטרנט באמצע הים התיכון.", "con": "האנטנה בספינה קבועה, ולא יכולה לעקוב אחרי לוויין שזז בשמיים.", "key": "לוויין תקשורת בגובה של כ־‎36,000 ק\"מ. שם הוא נראה כאילו הוא עומד במקום, ואפשר לכוון אליו אנטנה קבועה."}, {"req": "רשות המים רוצה לבדוק כל חודש את מפלס הכנרת ואת הצמחייה סביבה.", "con": "צריך לראות פרטים קטנים, של מטרים בודדים.", "key": "לוויין תצפית נמוך (מאות ק\"מ) עם מצלמה חדה. משווים תמונות מחודשים שונים, כמו בימת אראל."}, {"req": "אסטרונומים רוצים לראות כוכבים שנולדים בתוך ענן אבק.", "con": "האבק מסתיר את האור הנראה, והאטמוספרה מטשטשת.", "key": "טלסקופ חלל שקולט אינפרה־אדום, מעל האטמוספרה. האור הזה עובר דרך האבק, כמו בג׳יימס ווב."}, {"req": "צוות חילוץ צריך לדעת בדיוק איפה נמצא מטייל שנתקע בנגב.", "con": "באזור אין קליטה סלולרית.", "key": "לווייני ניווט: המכשיר של המטייל רק קולט אותות מלפחות ארבעה לוויינים, ולא צריך קליטה סלולרית. כדי לשלוח את המיקום לצוות צריך גם לוויין תקשורת: לפעמים משימה צריכה שני כלים."}, {"req": "השירות המטאורולוגי רוצה לראות כל עשר דקות איך סופה מתפתחת מעל הים התיכון.", "con": "צריך לראות את אותו אזור כל הזמן, בלי הפסקה.", "key": "לוויין מזג אוויר בגובה של כ־‎36,000 ק\"מ, כמו מטאוסט. הוא נשאר מעל אותו אזור ומצלם חצי כדור ארץ כל עשר דקות."}];
+const $ = id => document.getElementById(id);
+C.forEach((c, i) => {
+  const b = document.createElement('button'); b.className = 'card'; b.type = 'button';
+  b.innerHTML = `<span class="no">בקשת משימה ${i+1}</span><span class="req"></span><span class="con"><b>האילוץ: </b></span>`;
+  b.querySelector('.req').textContent = c.req; b.querySelector('.con').append(c.con);
+  b.onclick = () => open(i); $('grid').appendChild(b);
+});
+let last = 0;
+function open(i){ last = i; const c = C[i]; $('bNo').textContent = `בקשת משימה ${i+1}`; $('bReq').textContent = c.req; $('bCon').textContent = c.con;
+  $('bKey').textContent = c.key; $('bKey').hidden = true; $('showKey').textContent = 'כיוון לתשובה (למורה)'; $('ov').hidden = false; $('close').focus(); }
+function close(){ $('ov').hidden = true; $('grid').children[last].focus(); }
+$('close').onclick = close; $('ov').onclick = e => { if (e.target.id === 'ov') close(); };
+$('showKey').onclick = () => { const k = $('bKey'); k.hidden = !k.hidden; $('showKey').textContent = k.hidden ? 'כיוון לתשובה (למורה)' : 'הסתרת הכיוון'; };
+addEventListener('keydown', e => { if (e.key === 'Escape' && !$('ov').hidden) close(); });
+</script></body></html>
