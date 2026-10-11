@@ -703,18 +703,18 @@ $('#finMenu').onclick = () => { hideFinale(); openMenu(); };
 const audio = new Audio(); let advTimer = null;
 const narr = $('#narr'), narrIcon = $('#narrIcon');
 const ICON_PLAY = '<path d="M7 4.5v11l9-5.5z"/>', ICON_PAUSE = '<path d="M7 4.5v11M13 4.5v11"/>';
-let kinetic = false, loadSeq = 0;
-function revealAllTokens(){ kinetic = false; layersEl.querySelectorAll('.wait').forEach(x => { if (!x.classList.contains('pop')) x.classList.remove('wait'); }); }
-function armKinetic(){ kinetic = true; cueDone = {}; layersEl.querySelectorAll('[data-t]').forEach(x => { const L = x.closest('.layer'); if (+(L && L.dataset.step || 0) === reveal) x.classList.add('wait'); }); }
+let kinetic = false, loadSeq = 0, live = false;
+function revealAllTokens(){ kinetic = false; layersEl.querySelectorAll('.wait').forEach(x => { if (!x.classList.contains('pop') && !x.closest('.layer.pending')) x.classList.remove('wait'); }); }
+function armKinetic(){ kinetic = true; cueDone = {}; layersEl.querySelectorAll('[data-t]').forEach(x => { const L = x.closest('.layer'); if (+(L && L.dataset.step || 0) === reveal && !x.classList.contains('wait')){ x.style.transition = 'none'; x.classList.add('wait'); void x.offsetWidth; x.style.transition = ''; } }); }
 let cueDone = {};
 function runCues(t){ const s = STEPS[cur]; if (!s.cues || reveal) return; s.cues.forEach((c,k) => { if (!cueDone[k] && t >= c.t){ cueDone[k] = true; const v = document.getElementById('bgvid'); if (v) v.remove(); setBg(c.bg, 'none'); } }); }
-function tickKinetic(){ const t = audio.currentTime; runCues(t);
+function tickKinetic(){ if (!live) return; const t = audio.currentTime; runCues(t);
   layersEl.querySelectorAll('[data-u]').forEach(x => x.classList.toggle('gone', t >= +x.dataset.u));
   layersEl.querySelectorAll('[data-h0]').forEach(x => x.classList.toggle('hl', !audio.paused && t >= +x.dataset.h0 && t < +x.dataset.h1));
   if (!kinetic) return;
   layersEl.querySelectorAll('.wait[data-t]').forEach(x => { if (+x.dataset.t <= t) x.classList.remove('wait'); }); }
 function loadNarration(s, seg){
-  clearTimeout(advTimer); audio.pause(); $('#narrFill').style.width='0'; kinetic = false;
+  clearTimeout(advTimer); audio.pause(); live = false; $('#narrFill').style.width='0'; kinetic = false;
   narrIcon.innerHTML = ICON_PLAY;
   if (!s.audio && !s.segAudio){ narr.style.visibility='hidden'; return; }
   narr.style.visibility='visible'; narr.classList.remove('missing'); $('#narrNote').textContent='';
@@ -732,7 +732,8 @@ function syncOpening(play){ const s = STEPS[cur], v = document.getElementById('b
   if (play){ if (Math.abs(v.currentTime - audio.currentTime) > .3) v.currentTime = Math.min(audio.currentTime, (v.duration||1e9) - .05); v.play().catch(()=>{}); } else v.pause(); }
 audio.addEventListener('seeked', () => syncOpening(!audio.paused));
 audio.addEventListener('pause', () => { narrIcon.innerHTML = ICON_PLAY; syncOpening(false); });
-audio.addEventListener('timeupdate', () => { if (audio.duration) $('#narrFill').style.width = (audio.currentTime/audio.duration*100)+'%'; tickKinetic(); });
+audio.addEventListener('playing', () => { live = true; tickKinetic(); });
+audio.addEventListener('timeupdate', () => { if (live && audio.duration) $('#narrFill').style.width = (audio.currentTime/audio.duration*100)+'%'; tickKinetic(); });
 audio.addEventListener('ended', () => {
   const s = STEPS[cur]; revealAllTokens();
   narrDone();
