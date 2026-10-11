@@ -710,6 +710,7 @@ function startMatch(){
   queue = shuffle(DATA.tasks.map((_,i) => i)); matched = 0; counts = {}; tries = 0;
   $('done').hidden = true;
   show('match'); $('hTitle').textContent = DATA.stage2.title;
+  try { window.parent.postMessage({ type: 'task-stage', id: 'l2-satellite-parts', step: 1 }, '*'); } catch(e){}
   renderTargets(); nextCard();
 }
 function renderTargets(){

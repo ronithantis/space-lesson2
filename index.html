@@ -446,7 +446,9 @@ const DEFAULTS = [
     B(53,3,45,[I('האבל · אור נראה',{size:1.5,weight:700,gap:0})],{step:1,align:'center'}),
     B(2,3,45,[I("ג'יימס ווב · אינפרה־אדום",{size:1.5,weight:700,gap:0})],{step:1,align:'center'}),
     B(15,86,70,[G('מה אתם רואים עכשיו, שלא ראיתם קודם?',{size:2,gap:0,at:5.2})],{step:1,align:'center',hideFrom:2}),
-    B(15,86,70,[G('הכלי קובע מה אפשר לגלות.',{size:2.2,gap:0,at:19.9})],{step:2,align:'center'})]},
+    B(15,86,70,[G('הכלי קובע מה אפשר לגלות.',{size:2.2,gap:0,at:19.9})],{step:2,align:'center'}),
+    B(10,95,80,[I('צילום: NASA, ESA, Hubble Heritage Team (STScI/AURA)',{size:.9,gap:0,at:42.6})],{align:'center',hideFrom:1}),
+    B(10,95,80,[I('צילומים: האבל: NASA, ESA, Hubble Heritage Team (STScI/AURA) · ג\'יימס ווב: NASA, ESA, CSA, STScI',{size:.9,gap:0})],{step:1,align:'center'})]},
   {id:'parts', label:'מה יש בלוויין?', task:'משימה 1', bg:'stars', kind:'embed', url:'l2_satellite_parts.html', segAudio:['l2_s14a','l2_s14b'], steps:1, noAuto:true, blocks:[]},
   {id:'s13', label:'הלוויין שלי · שלב 2', task:'משימה 2', bg:'draft', audio:'l2_s13', shade:'right', noAuto:true, sheet:'journal', blocks:[
     B(54,10,42,[G('יומן המשימה',{size:1.8,gap:0}), T('הלוויין שלי · שלב 2',{size:3.2,gap:.3}),
@@ -627,6 +629,8 @@ function next(){
   if (s.finale && !editing){ showFinale(); return; }
   go(cur+1);
 }
+addEventListener('message', e => { const d = e.data, s = STEPS[cur]; if (!d || d.type !== 'task-stage' || !s || s.kind !== 'embed' || editing) return;
+  if (d.step === reveal + 1 && reveal < stepCount(s)) next(); });
 function prev(){ if (finaleOn){ hideFinale(); return; } go(cur-1); }
 
 /* ---------- media: video, embedded activity, living background ---------- */
