@@ -418,9 +418,9 @@ const DEFAULTS = [
   {id:'s08', label:'ונוס: מה שהעין לא רואה', bg:'s08', segAudio:['l2_s08a','l2_s08b','l2_s08c'], stepBg:{1:'s08ir'}, shade:'rightStrong', motion:'none', noAuto:true, blocks:[
     B(58,6,38,[T('מה שהעין\nלא רואה',{size:3.4}), I('ונוס: לוויין מחקר ישראלי־צרפתי',{size:1.7,gap:.5,at:18.9}),
       G('12 ערוצים • אור נראה • אינפרה־אדום קרוב',{size:1.7,gap:.6,seq:[23.9, 27.4, 29.5]})]),
-    B(58,40,38,[I('כך העין רואה את השדות',{size:1.9,weight:700,gap:0,at:33.7})],{hideFrom:1}),
-    B(58,52,38,[G('אותם שדות, בעיני החיישן',{size:2.1,gap:0,at:.6}), I('מה השתנה?',{size:2,weight:700,gap:.4,at:6.1})],{step:1}),
-    B(58,68,38,[I('צמחייה בריאה: מחזירה הרבה אינפרה־אדום',{size:1.6,gap:0,at:3.9}), I('שטח יבש: מחזיר פחות',{size:1.6,gap:.3,at:7.1})],{step:2}),
+    B(58,44,38,[I('כך העין רואה את השדות',{size:1.9,weight:700,gap:0,at:33.7})],{hideFrom:1}),
+    B(58,44,38,[G('אותם שדות, בעיני החיישן',{size:2.1,gap:0,at:.6}), I('מה השתנה?',{size:2,weight:700,gap:.4,at:6.1})],{step:1}),
+    B(58,62,38,[I('צמחייה בריאה: מחזירה הרבה אינפרה־אדום',{size:1.6,gap:0,at:3.9}), I('שטח יבש: מחזיר פחות',{size:1.6,gap:.3,at:7.1})],{step:2}),
     B(58,90,38,[I('המחשה: כך נראים שדות בצילום אינפרה־אדום',{size:1,gap:0})],{step:1})]},
   {id:'s09', label:'תבל: לוויינים של תלמידים', bg:'s09', segAudio:['l2_s09a','l2_s09b'], shade:'rightStrong', noAuto:true, blocks:[
     B(56,8,40,[T('תבל'), I('תלמידי תיכון מתכננים, בונים ומפעילים לוויינים',{size:1.75,gap:.4,at:5.4}),
@@ -428,7 +428,7 @@ const DEFAULTS = [
       T('10 × 10 × 11 ס"מ',{size:2.6,gap:1,color:'glow',at:26.2})]),
     B(56,70,40,[G('מה הייתם רוצים למדוד מהחלל?',{size:2.2,gap:0,at:5.2})],{step:1}),
     B(4,8,46,[P('tvteam','צוות תבל עם הלוויין שבנו',{at:6.2,until:15.3})]),
-    B(10,10,34,[P('tvcube','לוויין תבל אמיתי, פתוח',{at:26.4,until:33})])]},
+    B(10,10,34,[P('tvcube','לוויין תבל אמיתי, פתוח',{at:26.4,until:31.8})])]},
   {id:'s10', label:'האבל', bg:'s10', audio:'l2_s10', shade:'top', blocks:[
     B(30,6,66,[G('נפנה את המבט אל היקום',{size:1.8,gap:0,at:4.4}), T('טלסקופ החלל האבל',{size:3.4,gap:.3}),
       I('שוגר ב-1990 • מקיף את כדור הארץ בגובה של כ-500 ק"מ',{size:1.7,gap:.6,seq:[10.1, 12.6],sep:' • '}),
@@ -454,14 +454,14 @@ const DEFAULTS = [
       I('הלוויין שלי צריך... כדי לגלות...',{size:1.9,weight:500,gap:1,at:22.5}),
       I('שמרו את הדף בשקית של שיעור 2.',{size:1.6,gap:.8,at:25.5})])]},
   {id:'missions', label:'מרכז המשימות', task:'הרחבה', bg:'stars', kind:'embed', url:'l2_missions.html', audio:'l2_s12', noAuto:true, sheet:'missions', blocks:[]},
-  {id:'s15', label:'לא מתחילים בלוויין', bg:'s01', audio:'l2_s15', cues:[{t:40.2, bg:'s15'}], shade:'top', motion:'none', noAuto:true, blocks:[
-    B(10,5,80,[G('תקשורת • ניווט • מזג אוויר • מחקר • טלסקופים',{size:1.9,gap:0,seq:[5.0, 6.6, 8.2, 9.9, 11.0]}),
-      T('לא מתחילים בלוויין. מתחילים בשאלה.',{size:3.4,gap:.6,at:15.6})],{align:'center'}),
-    B(10,72,80,[I("וויאג'ר • JUICE • קיוריוסיטי",{size:1.8,gap:0,seq:[28.7, 31.8, 34.6],until:40.2}),
-      G('בשיעור הבא: מערכת השמש',{size:2.2,gap:.6,at:40.4})],{align:'center'}),
-    B(31,26,38,[P('voy',"וויאג'ר ליד צדק · הדמיה: NASA/JPL",{at:28.7,until:31.6})]),
-    B(31,26,38,[P('juice','החללית JUICE ליד צדק וירחיו · הדמיה',{at:31.8,until:34.4})]),
-    B(31,26,38,[P('cur','רכב החלל קיוריוסיטי על מאדים · צילום: NASA',{at:34.6,until:40.1})]),
+  {id:'s15', label:'לא מתחילים בלוויין', bg:'s01', audio:'l2_s15', cues:[{t:40.2, bg:'s15'}], shade:'right', motion:'none', noAuto:true, blocks:[
+    B(64,6,33,[G('תקשורת • ניווט • מזג אוויר • מחקר • טלסקופים',{size:1.45,gap:0,seq:[5.0, 6.6, 8.2, 9.9, 11.0]}),
+      T('לא מתחילים בלוויין.\nמתחילים בשאלה.',{size:3,gap:.6,at:15.6}),
+      I("וויאג'ר • JUICE • קיוריוסיטי",{size:1.6,gap:.8,seq:[28.7, 31.8, 34.6],until:40.2})]),
+    B(10,72,80,[G('בשיעור הבא: מערכת השמש',{size:2.2,gap:0,at:40.4})],{align:'center'}),
+    B(62,37,35,[P('voy',"וויאג'ר ליד צדק · הדמיה: NASA/JPL",{at:28.7,until:31.6})]),
+    B(62,37,35,[P('juice','החללית JUICE ליד צדק וירחיו · הדמיה',{at:31.8,until:34.4})]),
+    B(62,37,35,[P('cur','רכב החלל קיוריוסיטי על מאדים · צילום: NASA',{at:34.6,until:40.1})]),
     B(10,93,80,[I('גודל כוכבי הלכת לפי קנה מידה. המרחקים ביניהם אינם לפי קנה מידה.',{size:.95,gap:0,at:40.4})],{align:'center'})]},
   {id:'craft', label:'בונים לוויין', task:'הרחבה', bg:'blue', shade:'right', noAuto:true, sheet:'craft', blocks:[
     B(54,12,41,[G('משימת העשרה',{size:1.8,gap:0}), T('בונים לוויין',{size:3.6,gap:.3}),
@@ -616,6 +616,7 @@ function next(){
   const s = STEPS[cur];
   if (!editing && reveal < stepCount(s)){
     reveal++;
+    layersEl.querySelectorAll('.item.pop').forEach(x => x.classList.add('gone'));
     if ((s.segments || s.segAudio) && (prefs.autoNarr || s.opening) && started && !editing){ audio.pause(); armKinetic(); }
     layersEl.querySelectorAll(`.layer[data-step="${reveal}"]`).forEach(d => d.classList.remove('pending'));
     layersEl.querySelectorAll('.layer[data-hide]').forEach(d => { if (reveal >= +d.dataset.hide) d.classList.add('pending'); });
@@ -709,7 +710,8 @@ function armKinetic(){ kinetic = true; cueDone = {}; layersEl.querySelectorAll('
 let cueDone = {};
 function runCues(t){ const s = STEPS[cur]; if (!s.cues || reveal) return; s.cues.forEach((c,k) => { if (!cueDone[k] && t >= c.t){ cueDone[k] = true; const v = document.getElementById('bgvid'); if (v) v.remove(); setBg(c.bg, 'none'); } }); }
 function tickKinetic(){ if (!live) return; const t = audio.currentTime; runCues(t);
-  layersEl.querySelectorAll('[data-u]').forEach(x => x.classList.toggle('gone', t >= +x.dataset.u));
+  const inStep = x => { const L = x.closest('.layer'); return +(L && L.dataset.step || 0) === reveal; };
+  layersEl.querySelectorAll('[data-u]').forEach(x => { if (inStep(x)) x.classList.toggle('gone', t >= +x.dataset.u); });
   layersEl.querySelectorAll('[data-h0]').forEach(x => x.classList.toggle('hl', !audio.paused && t >= +x.dataset.h0 && t < +x.dataset.h1));
   if (!kinetic) return;
   layersEl.querySelectorAll('.wait[data-t]').forEach(x => { if (+x.dataset.t <= t) x.classList.remove('wait'); }); }
@@ -735,7 +737,7 @@ audio.addEventListener('pause', () => { narrIcon.innerHTML = ICON_PLAY; syncOpen
 audio.addEventListener('playing', () => { live = true; tickKinetic(); });
 audio.addEventListener('timeupdate', () => { if (live && audio.duration) $('#narrFill').style.width = (audio.currentTime/audio.duration*100)+'%'; tickKinetic(); });
 audio.addEventListener('ended', () => {
-  const s = STEPS[cur]; revealAllTokens();
+  const s = STEPS[cur]; revealAllTokens(); layersEl.querySelectorAll('.item.pop').forEach(x => x.classList.add('gone'));
   narrDone();
   if (prefs.autoAdv && !s.noAuto && !editing && reveal >= stepCount(s)) advTimer = setTimeout(next, 1400);
 });
