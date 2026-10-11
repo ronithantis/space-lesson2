@@ -210,6 +210,8 @@ body.prestart .sheetbtn{display:none}
 .item.pop img{display:block;width:100%;border-radius:calc(var(--u)*.35)}
 .item.pop span{display:block;padding:calc(var(--u)*.4) calc(var(--u)*.2) 0}
 .item.pop.wait,.item.pop.gone{transform:scale(.96)}
+.item.pop.ring{background:none;padding:0;border-radius:50%;aspect-ratio:1/1;border:calc(var(--u)*.18) solid rgba(255,232,190,.85);box-shadow:0 0 calc(var(--u)*2.2) rgba(255,214,150,.75),inset 0 0 calc(var(--u)*1.6) rgba(255,214,150,.45);transition:opacity .45s ease,transform .45s ease}
+.item.pop.ring.wait,.item.pop.ring.gone{transform:scale(1.25)}
 #finale{position:absolute;inset:0;z-index:4;display:flex;flex-direction:column;justify-content:center;padding:0 10%;
   background:radial-gradient(ellipse at 70% 40%,rgba(8,14,28,.82),rgba(2,3,8,.95));opacity:0;pointer-events:none;transition:opacity 1.8s ease}
 #finale.on{opacity:1;pointer-events:auto}
@@ -374,6 +376,7 @@ const CO = (x,y,w,he,pt,col,step) => ({id:uid('b'), x, y, w, h:4.6, box:true, ca
   items:[I(he,{size:1.05, weight:500, color:'dark', lh:1.1, gap:0})]});
 
 const P = (img,cap,o) => Object.assign(I(cap,{size:1.1,weight:500,gap:0}), {img}, o||{});
+const RING = o => Object.assign(I(' ',{gap:0}), {ring:true}, o||{});
 const WATCH = () => B(14,4.5,72,[T('צפו בסרטון',{size:2.4})]);
 
 const DEFAULTS = [
@@ -480,6 +483,14 @@ const DEFAULTS = [
       G('המשימה קובעת את התכנון.',{size:2,gap:1,at:39.4})])]},
   {id:'end', label:'בשיעור הבא', bg:'end', audio:'l2_s17', shade:'bottom', noAuto:true, finale:true, blocks:[
     B(30,8,66,[I('היום גיליתם: לכל משימה, הכלי שלה.',{size:1.8,gap:0,at:2.4}), I('תכננתם לוויין שמתחיל בשאלה.',{size:1.8,gap:.2,at:11.8})],{hideFrom:99}),
+    B(18.3,47.06,3.2,[RING({at:27.2,until:28.1})]),
+    B(22.8,45.81,4.6,[RING({at:27.75,until:28.65})]),
+    B(29.3,45.63,4.8,[RING({at:28.3,until:29.2})]),
+    B(35.9,46.7,3.6,[RING({at:28.85,until:29.75})]),
+    B(41.55,36.12,15.5,[RING({at:29.4,until:30.3})]),
+    B(62.55,38.79,12.5,[RING({at:29.95,until:30.85})]),
+    B(79.5,43.14,7.6,[RING({at:30.5,until:31.4})]),
+    B(89.7,42.79,8.0,[RING({at:31.05,until:31.95})]),
     B(30,70,66,[G('בשיעור הבא:',{size:2.2,gap:0,at:20.1}), T('מערכת השמש',{size:4.4,at:24.6})])]}
 ];
 
@@ -551,7 +562,8 @@ function renderLayers(instant){
         const sep = it.sep || ' • ', parts = txt.split(sep);
         parts.forEach((p, j) => { const sp = document.createElement('span'); sp.className = 'tok';
           if (it.seq[j] != null) sp.dataset.t = it.seq[j]; sp.textContent = (j ? sep : '') + p; e.appendChild(sp); });
-      } else if (it.img){ e.classList.add('pop','wait'); e.innerHTML = `<img src="${BG[it.img]}" alt=""><span></span>`; e.querySelector('span').textContent = txt; }
+      } else if (it.ring){ e.classList.add('pop','ring','wait'); e.textContent = ''; }
+      else if (it.img){ e.classList.add('pop','wait'); e.innerHTML = `<img src="${BG[it.img]}" alt=""><span></span>`; e.querySelector('span').textContent = txt; }
       else e.textContent = txt;
       if (it.at != null) e.dataset.t = it.at;
       if (it.until != null) e.dataset.u = it.until;
