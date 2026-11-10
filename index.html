@@ -774,11 +774,13 @@ function loadNarration(s, seg){
   const name = s.segAudio ? s.segAudio[seg] : s.segments ? `${s.audio}_${seg}` : s.audio;
   audio.src = `${name}_${LANG}.mp3`;
   const myLoad = ++loadSeq;
-  if ((prefs.autoNarr || s.opening) && !editing && started){ armKinetic(); audio.play().catch(err => { if (myLoad !== loadSeq || (err && err.name === 'AbortError')) return; revealAllTokens(); narrDone(); }); }
-  else { revealAllTokens(); narrDone(); }
+  if ((prefs.autoNarr || s.opening) && !editing && started){ armKinetic(); audio.play().catch(err => { if (myLoad !== loadSeq || (err && err.name === 'AbortError')) return; revealAllTokens(); narrDone(); playSilent(); }); }
+  else { revealAllTokens(); narrDone(); playSilent(); }
 }
+// no narration running (auto-narration off, or the browser blocked sound): the synced animation still plays by itself
+function playSilent(){ setTimeout(() => { const s = STEPS[cur], v = document.getElementById('bgvid'); if (s && s.sync && v && audio.paused) v.play().catch(()=>{}); }, 60); }
 function narrDone(){ if (STEPS[cur].finale){ endState.narr = true; checkFinale(); } }
-audio.addEventListener('error', () => { revealAllTokens(); narr.classList.add('missing'); $('#narrNote').textContent='אין עדיין קריינות'; narrIcon.innerHTML = ICON_PLAY; narrDone(); });
+audio.addEventListener('error', () => { revealAllTokens(); narr.classList.add('missing'); $('#narrNote').textContent='אין עדיין קריינות'; narrIcon.innerHTML = ICON_PLAY; narrDone(); playSilent(); });
 audio.addEventListener('play', () => { if (audio.currentTime < .5 && !editing) { armKinetic(); tickKinetic(); }
   narrIcon.innerHTML = ICON_PAUSE; if (STEPS[cur].finale) endState.narr = false; syncOpening(true); });
 function syncOpening(play){ const s = STEPS[cur], v = document.getElementById('bgvid'); if (!s || !(s.opening || s.sync) || !v) return;
